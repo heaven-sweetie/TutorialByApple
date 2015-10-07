@@ -14,13 +14,17 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    var meal: Meal?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         nameTextField.delegate = self
+        
+        checkValidMealName()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,6 +33,15 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
 //    MARK: UITextFieldDelegate
+    func textFieldDidBeginEditing(textField: UITextField) {
+        saveButton.enabled = false
+    }
+    
+    func checkValidMealName() {
+        let text = nameTextField.text ?? ""
+        saveButton.enabled = !text.isEmpty
+    }
+
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
@@ -36,6 +49,8 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+        checkValidMealName()
+        navigationItem.title = textField.text
     }
     
 //    MARK: UIImagePickerControllerDelegate
@@ -47,6 +62,21 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         photoImageView.image = selectedImage
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+//    MARK: Navigation
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if saveButton == sender as! UIBarButtonItem {
+            let name = nameTextField.text ?? ""
+            let photo = photoImageView.image
+            let rating = ratingControl.rating
+            
+            meal = Meal(name: name, photo: photo, rating: rating)
+        }
     }
     
 //    MARK: Actions
