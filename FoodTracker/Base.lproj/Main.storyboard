@@ -31,7 +31,7 @@
                                             <rect key="frame" x="98" y="8" width="494" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yPW-Bi-kQu" customClass="RatingControl" customModule="FoodTracker" customModuleProvider="target">
@@ -47,6 +47,7 @@
                                     <outlet property="nameLabel" destination="8Fk-ug-gXp" id="aMX-Ol-LEI"/>
                                     <outlet property="photoImageView" destination="0D2-x7-JAE" id="Yzx-fW-MtO"/>
                                     <outlet property="ratingControl" destination="yPW-Bi-kQu" id="OuD-wh-i6G"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="oLN-cz-VXq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -185,10 +186,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kpe-F8-Yhc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1090" y="139"/>
+            <point key="canvasLocation" x="1166" y="611"/>
         </scene>
     </scenes>
     <resources>
         <image name="defaultphoto" width="320" height="320"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="oLN-cz-VXq"/>
+    </inferredMetricsTieBreakers>
 </document>
